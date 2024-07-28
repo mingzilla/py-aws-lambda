@@ -4,8 +4,6 @@ build-backend = "hatchling.build"
 
 [project]
 name = "py-aws-lambda"
-dynamic = ["version"]
-description = ''
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
@@ -24,13 +22,11 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-
 # Non-generated definition
 version = "0.1.0"
 description = "A sample project for using python as AWS lambda"
 
 dependencies = [
-    "numpy>=1.21.0,<2.0.0",
 ]
 
 [project.optional-dependencies]
@@ -56,7 +52,8 @@ dependencies = [
 # hatch run test
 test = "pytest {args:tests}"
 # hatch run test-cov
-test-cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=py_flat_orm --cov=tests {args:tests}"
+test-cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=py_aws_lambda --cov=tests {args:tests}"
+
 
 [project.urls]
 Documentation = "https://github.com/ming.huang/py-aws-lambda#readme"

@@ -21,7 +21,7 @@ pip install py-aws-lambda
 This project is set up using `hatch`. 
 * Run `xi_init.ps1` or `xi_init.sh` to apply `pyproject.toml`
   - run `exit` (deactivate env) first if you get `Cannot remove active environment: py-aws-lambda`  
-* to other `.ps1` or `.sh` files for relevant tasks
+* Run other `.ps1` or `.sh` files for relevant tasks
 * `x1` means execution, and generally the 1st thing to run
 * run `hatch -h` 
 
