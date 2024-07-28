@@ -1,0 +1,93 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "py-aws-lambda"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "ming.huang", email = "means789@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+
+# Non-generated definition
+version = "0.1.0"
+description = "A sample project for using python as AWS lambda"
+
+dependencies = [
+    "numpy>=1.21.0,<2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy",
+    "pylint",
+    "flake8",
+    "black",
+]
+
+# Non-generated section
+[tool.hatch.envs.py-aws-lambda]
+path = ".venv"
+paths = ["src"]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.hatch.envs.default.scripts]
+# hatch run test
+test = "pytest {args:tests}"
+# hatch run test-cov
+test-cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=py_flat_orm --cov=tests {args:tests}"
+
+[project.urls]
+Documentation = "https://github.com/ming.huang/py-aws-lambda#readme"
+Issues = "https://github.com/ming.huang/py-aws-lambda/issues"
+Source = "https://github.com/ming.huang/py-aws-lambda"
+
+[tool.hatch.version]
+path = "src/py_aws_lambda/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/py_aws_lambda tests}"
+
+[tool.coverage.run]
+source_pkgs = ["py_aws_lambda", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/py_aws_lambda/__about__.py",
+]
+
+[tool.coverage.paths]
+py_aws_lambda = ["src/py_aws_lambda", "*/py-aws-lambda/src/py_aws_lambda"]
+tests = ["tests", "*/py-aws-lambda/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
