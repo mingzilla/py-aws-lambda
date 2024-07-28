@@ -22,11 +22,18 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
+
 # Non-generated definition
 version = "0.1.0"
 description = "A sample project for using python as AWS lambda"
 
 dependencies = [
+    "boto3",
+    "flask",
+    "aws-lambda-powertools",
+    "py-flat-orm",
+    "requests",
+    "serverless-wsgi"
 ]
 
 [project.optional-dependencies]
@@ -44,6 +51,12 @@ paths = ["src"]
 
 [tool.hatch.envs.default]
 dependencies = [
+    "boto3",
+    "flask",
+    "aws-lambda-powertools",
+    "py-flat-orm",
+    "requests",
+    "serverless-wsgi",
     "pytest",
     "pytest-cov",
 ]

@@ -33,3 +33,4 @@ dist/
 
 # Windows specific
 Thumbs.db
+/.aws-sam/

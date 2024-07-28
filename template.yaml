@@ -1,0 +1,59 @@
+# template.yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless application using AWS Lambda
+
+Resources:
+  UsersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/py_aws_lambda/controller/users_controller.lambda_handler
+      Runtime: python3.12
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /py-aws-lambda/users/{id}
+            Method: get
+        CreateUser:
+          Type: Api
+          Properties:
+            Path: /py-aws-lambda/users
+            Method: post
+        UpdateUser:
+          Type: Api
+          Properties:
+            Path: /py-aws-lambda/users/{id}
+            Method: put
+        DeleteUser:
+          Type: Api
+          Properties:
+            Path: /py-aws-lambda/users/{id}
+            Method: delete
+
+  AddressesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/py_aws_lambda/controller/addresses_controller.lambda_handler
+      Runtime: python3.12
+      Events:
+        GetAddress:
+          Type: Api
+          Properties:
+            Path: /py-aws-lambda/addresses/{id}
+            Method: get
+        CreateAddress:
+          Type: Api
+          Properties:
+            Path: /py-aws-lambda/addresses
+            Method: post
+        UpdateAddress:
+          Type: Api
+          Properties:
+            Path: /py-aws-lambda/addresses/{id}
+            Method: put
+        DeleteAddress:
+          Type: Api
+          Properties:
+            Path: /py-aws-lambda/addresses/{id}
+            Method: delete
