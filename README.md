@@ -34,6 +34,13 @@ This project is set up using `hatch`.
 * set up with git 
 * Run e.g. `xi_init.ps1` to apply `pyproject.toml`
 
+### Git
+
+```shell
+git init
+git config --global --add safe.directory E:/code/python/py-aws-lambda
+```
+
 ### Sync Dependencies
 * run `hatch shell` to activate env, it also syncs dependencies
 
