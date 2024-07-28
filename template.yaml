@@ -7,8 +7,13 @@ Resources:
   UsersFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/py_aws_lambda/controller/users_controller.lambda_handler
+      Handler: src/py_aws_lambda.handler.users_handler.lambda_handler
       Runtime: python3.12
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 100
+      Policies:
+        - AWSLambdaBasicExecutionRole
       Events:
         GetUser:
           Type: Api
@@ -34,8 +39,13 @@ Resources:
   AddressesFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/py_aws_lambda/controller/addresses_controller.lambda_handler
+      Handler: src/py_aws_lambda.handler.addresses_handler.lambda_handler
       Runtime: python3.12
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 100
+      Policies:
+        - AWSLambdaBasicExecutionRole
       Events:
         GetAddress:
           Type: Api
@@ -57,3 +67,16 @@ Resources:
           Properties:
             Path: /py-aws-lambda/addresses/{id}
             Method: delete
+
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+
+Outputs:
+  UsersFunction:
+    Description: "Users Lambda Function ARN"
+    Value: !GetAtt UsersFunction.Arn
+  AddressesFunction:
+    Description: "Addresses Lambda Function ARN"
+    Value: !GetAtt AddressesFunction.Arn
