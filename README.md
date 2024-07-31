@@ -66,6 +66,39 @@ git config --global --add safe.directory E:/code/python/py-aws-lambda
 * `hatch build`
 * `hatch publish` - ask chatGPT how to set up a PyPI Account
 
+## AWS lambda serverless function
+
+### Setting up
+* install aws tooling by adding dependencies "aws-lambda-powertools", "serverless-wsgi"
+* define them in `pyproject.toml`
+
+### Lambda functions
+* need to create `template.yaml` file
+  - `Handler: src/py_aws_lambda.handler.users_handler.lambda_handler`
+    - This refers to the `users_handler` file, which has a `lambda_handler` function to resolve the endpoints
+  - `Path: /py-aws-lambda/users/{id}`
+    - This has to 100% match definition in `users_handler`: `@app.get("/py-aws-lambda/users/<id>")` 
+* `src/py_aws_lambda.handler.users_handler`
+  - `@app.get("/py-aws-lambda/users/<id>")` # defines the endpoint 
+  - `def lambda_handler(event, context):` # handler to be put int `template.yaml` `Handler`
+
+### Building
+* need to export dependencies into `requirements.txt`, because aws tooling only supports this one way of resolving dependencies
+* build with `sam build`
+
+#### convert `pyproject.toml` to `requirements.txt`
+* `pip-tools` is an extra tool convert `pyproject.toml` into `requirements.txt`
+
+```shell
+pip install pip-tools
+pip-compile --output-file=requirements.txt pyproject.toml
+```
+
+### Run in dev
+```shell
+sam local start-api
+```
+
 ## License
 
 `py-aws-lambda` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
